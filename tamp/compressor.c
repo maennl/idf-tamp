@@ -363,7 +363,7 @@ static TAMP_NOINLINE tamp_res write_extended_match_token(TampCompressor* compres
     // Write to window (up to end of buffer, no wrap)
     uint16_t remaining = WINDOW_SIZE - compressor->window_pos;
     uint8_t window_write = MIN(count, remaining);
-    tamp_window_copy(compressor->window, &compressor->window_pos, position, window_write, window_mask);
+    tamp_window_copy(compressor->window, (uint16_t*) &compressor->window_pos, position, window_write, window_mask);
 
     compressor->extended_match_count = 0;  // Position reset not needed - only read when count > 0
 
